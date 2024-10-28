@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>WebSocket Test</title>
+</head>
+
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        height: 100vh;
+    }
+
+    h1 {
+        margin-bottom: 20px;
+    }
+
+    input {
+        padding: 10px;
+        margin-bottom: 10px;
+        width: 300px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        font-size: 1.1em;
+    }
+
+    #response {
+        padding: 10px;
+        width: 300px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+    }
+</style>
+<body>
+    <h1>Ask Anything</h1>
+    <input type="text" id="messageInput" placeholder="Enter your message" />
+    <div id="response"></div>
+
+    <script>
+        const ws = new WebSocket("ws://127.0.0.1:8000/ws");
+
+        ws.onopen = () => {
+            console.log("Connected to WebSocket server");
+        };
+
+        ws.onmessage = (event) => {
+            document.getElementById("response").innerText = event.data;
+        };
+
+        const input = document.getElementById("messageInput");
+        input.addEventListener("input", function(event) {
+            ws.send(event.target.value)
+        });
+
+        ws.onclose = () => {
+            console.log("Disconnected from WebSocket server");
+        };
+    </script>
+</body>
+</html>
