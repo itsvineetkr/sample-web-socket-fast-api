@@ -2,7 +2,7 @@ from huggingface_hub import InferenceClient
 
 
 model = "mistralai/Mistral-Nemo-Instruct-2407"
-client = InferenceClient(api_key="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")
+client = InferenceClient(api_key="")
 META_PROMPT = "Based on the user's partial input, predict and generate a possible full question or topic the user might be asking. The completion should be natural and relevant to the partial text. Remember not to generate any thing else except for the guess, no extra english."
 
 
